@@ -9,11 +9,7 @@ from datetime import datetime
 import redis
 import os
 
-redis_host = os.environ.get('REDIS_HOST', 'localhost')
-redis_port = int(os.environ.get('REDIS_PORT', 6379))
-redis_client = redis.StrictRedis(host=redis_host, port=redis_port)
-
-# r = redis.Redis(host=redis_host, port=redis_port, db=0)
+redis_client = redis.from_url(os.environ.get('REDISCLOUD_URL'))
 
 
 class ImageUploader():
@@ -89,10 +85,3 @@ class ImageUploader():
             return isValidWidth and isValidHeight
         else:
             raise Exception("imageFile is null")
-
-
-img = ImageUploader()
-# print(img.upload("http://getwallpapers.com/wallpaper/full/b/8/d/32803.jpg"))
-# print(img.upload("http://getwallpapers.com/wallpaper/full/b/8/d/32803.jpg"))
-
-# print(img.upload("http://getwallpapers.com/wallpaper/full/b/8/d/32803.jpg"))
